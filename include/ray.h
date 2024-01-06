@@ -12,18 +12,18 @@ class Ray {
 		Ray (T a, T b, T c); 
 		Ray ();
 		// operator overload functions
-		*Ray<T> operator+ (Ray<T> const& r1, Ray<T> const& r2); // addition of two rays
-		*Ray<T> operator* (Ray<T> const& r1, Ray<T> const& r2); // dot product
-		*Ray<T> operator- (Ray<T> const& r1, Ray<T> const& r2); // subtraction of two rays
-		*Ray<T> operator== (Ray<T> const& r1, Ray<T> const& r2); // equality
-		*Ray<T> operator!= (Ray<T> const& r1, Ray<T> const& r2); // inequality
-		*Ray<T> operator>= (Ray<T> const& r1, Ray<T> const& r2); // greater than or equal to
-		*Ray<T> operator<= (Ray<T> const& r1, Ray<T> const& r2); // less than or equal to
-		*Ray<T> operator< (Ray<T> const& r1, Ray<T> const& r2); // less than
-		*Ray<T> operator> (Ray<T> const& r1, Ray<T> const& r2); // greater than
-		*Ray<T> operator+= (Ray<T> const& r1, Ray<T> const& r2); // add and assign
-		*Ray<T> operator-= (Ray<T> const& r1, Ray<T> const& r2); // subtract and assign
-		*Ray<T> operator= (Ray<T> const& r1, Ray<T> const& r2); // assignment
+		friend Ray<T>* operator+<> (Ray<T> const& r1, Ray<T> const& r2); // addition of two rays
+		friend Ray<T>* operator- (Ray<T> const& r1, Ray<T> const& r2); // subtraction of two rays
+		friend T* operator*<> (Ray<T> const& r1, Ray<T> const& r2); // dot product
+		friend Ray<T>* operator== (Ray<T> const& r1, Ray<T> const& r2); // equality
+		friend Ray<T>* operator!= (Ray<T> const& r1, Ray<T> const& r2); // inequality
+		friend Ray<T>* operator>= (Ray<T> const& r1, Ray<T> const& r2); // greater than or equal to
+		friend Ray<T>* operator<= (Ray<T> const& r1, Ray<T> const& r2); // less than or equal to
+		friend Ray<T>* operator< (Ray<T> const& r1, Ray<T> const& r2); // less than
+		friend Ray<T>* operator> (Ray<T> const& r1, Ray<T> const& r2); // greater than
+		friend Ray<T>* operator+= (Ray<T> const& r1, Ray<T> const& r2); // add and assign
+		friend Ray<T>* operator-= (Ray<T> const& r1, Ray<T> const& r2); // subtract and assign
+		friend Ray<T>* operator= (Ray<T> const& r1, Ray<T> const& r2); // assignment
 
 
 };
