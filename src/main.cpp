@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Config.h"
 #include <fstream>
+#include "ray.h"
 
 using std::cout;
 using std::endl;
@@ -9,9 +10,11 @@ using std::fstream;
 int main(void) {
 
 	cout << "LightWizard Version " << VERSION_MAJOR << endl;
+
 	
+
 	// IMAGE
-	
+/*	
 	int image_width = 1920;
 	int image_height = 1080;
 
@@ -49,7 +52,7 @@ int main(void) {
 		}
 	
 	}
-
+*/
 	return 0;
 
 }
