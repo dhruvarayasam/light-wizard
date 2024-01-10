@@ -1,6 +1,5 @@
 .vscode/
 bin/
 build/
-lib/
 .ycm_extra_conf.py
 .cache/

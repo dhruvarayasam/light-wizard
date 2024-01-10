@@ -1,16 +1,29 @@
 #include <iostream>
-#include "Config.h"
 #include <fstream>
-#include "ray.h"
+#include "Config.h"
+#include "../lib/rays/ray.h"
+
 
 using std::cout;
 using std::endl;
 using std::fstream;
 
+
+
+
+
+
+
+
+
 int main(void) {
 
 	cout << "LightWizard Version " << VERSION_MAJOR << endl;
 
+	Ray r1 {1, 2, 3};
+	Ray r2 {4, 5, 6};
+
+	Ray r3 = r1 + r2;
 	
 
 	// IMAGE
