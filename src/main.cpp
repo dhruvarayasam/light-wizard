@@ -18,12 +18,35 @@ using std::fstream;
 
 int main(void) {
 
-	cout << "LightWizard Version " << VERSION_MAJOR << endl;
+	cout << "\nLightWizard Version " << VERSION_MAJOR << "\n";
 
-	Ray r1 {1, 2, 3};
-	Ray r2 {4, 5, 6};
+	cout << R"(                  .
 
-	Ray r3 = r1 + r2;
+                   .
+         /^\     .
+    /\   "V"
+   /__\   I      O  o
+  //..\\  I     .
+  \].`[/  I
+  /l\/j\  (]    .  O
+ /. ~~ ,\/I          .
+ \\L__j^\/I       o
+  \/--v}  I     o   .
+  |    |  I   _________
+  |    |  I c(`       ')o
+  |    l  I   \.     ,/
+_/j  L l\_!  _//^---^\\_ )" << "\n";
+
+	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
+
+	Ray r1 {1.0f, 2.0f, 3.0f};
+	Ray r2 {4.0f, 5.0f, 6.0f};
+
+	Ray r3 = r1 - r2;
+
+	cout << r1 << endl;
+	cout << r2 << endl;
+	cout << r3 << endl;
 	
 
 	// IMAGE

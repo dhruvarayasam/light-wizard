@@ -14,18 +14,23 @@ public:
 	Ray();
 	Ray(float x, float y, float z);
 
+	// operator overloading
 	friend Ray operator+ (Ray const& r1, Ray const& r2);
+	friend Ray operator- (Ray const& r1, Ray const& r2); // subtraction of two rays
+	friend Ray operator* (Ray const& r1, Ray const& r2); // dot product
+	friend Ray operator== (Ray const& r1, Ray const& r2); // equality
+	friend Ray operator!= (Ray const& r1, Ray const& r2); // inequality
+	friend Ray operator>= (Ray const& r1, Ray const& r2); // greater than or equal to
+	friend Ray operator<= (Ray const& r1, Ray const& r2); // less than or equal to
+	friend Ray operator< (Ray const& r1, Ray const& r2); // less than
+	friend Ray operator> (Ray const& r1, Ray const& r2); // greater than
+	Ray operator+= (Ray const& r1); // add and assign
+	Ray operator-= (Ray const& r1); // subtract and assign
+	Ray* operator= (Ray const& r1); // assignment
+	friend std::ostream& operator<< (std::ostream& os, Ray const & r1); // print
 
-	// addition of two rays
-	// friend Ray<T> operator- (Ray<T> const& r1, Ray<T> const& r2); // subtraction of two rays
-	// friend T operator* (Ray<T> const& r1, Ray<T> const& r2); // dot product
-	// friend Ray<T> operator== (Ray<T> const& r1, Ray<T> const& r2); // equality
-	// friend Ray<T> operator!= (Ray<T> const& r1, Ray<T> const& r2); // inequality
-	// friend Ray<T> operator>= (Ray<T> const& r1, Ray<T> const& r2); // greater than or equal to
-	// friend Ray<T> operator<= (Ray<T> const& r1, Ray<T> const& r2); // less than or equal to
-	// friend Ray<T> operator< (Ray<T> const& r1, Ray<T> const& r2); // less than
-	// friend Ray<T> operator> (Ray<T> const& r1, Ray<T> const& r2); // greater than
-	// friend Ray<T> operator+= (Ray<T> const& r1, Ray<T> const& r2); // add and assign
-	// friend Ray<T> operator-= (Ray<T> const& r1, Ray<T> const& r2); // subtract and assign
-	// friend Ray<T>* operator= (Ray<T> const& r1, Ray<T> const& r2); // assignment
+		
+
+
+
 };
