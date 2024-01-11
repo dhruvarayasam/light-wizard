@@ -1,20 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include "Config.h"
-#include "../lib/rays/ray.h"
+#include "../lib/ray_lib/ray.h"
 
 
 using std::cout;
 using std::endl;
 using std::fstream;
-
-
-
-
-
-
-
-
 
 int main(void) {
 

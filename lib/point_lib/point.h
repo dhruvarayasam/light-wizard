@@ -11,6 +11,4 @@ class Point {
         Point ();
         Point (float a, float b, float c);
 
-    
-
 };

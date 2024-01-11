@@ -21,12 +21,24 @@ set_target_properties(LightWizard
 
 
 # Library directories
-add_subdirectory(lib/rays)
+add_subdirectory(lib/ray_lib)
+add_subdirectory(lib/point_lib)
+add_subdirectory(lib/operations_lib)
 
 target_link_libraries(LightWizard PUBLIC RayLib)
+target_link_libraries(LightWizard PUBLIC PointLib)
+target_link_libraries(LightWizard PUBLIC OperationsLib)
 
 target_include_directories(RayLib PUBLIC
 							"${PROJECT_BINARY_DIR}"
-							"${PROJECT_SOURCE_DIR}/lib/rays")
+							"${PROJECT_SOURCE_DIR}/lib/ray_lib")
+
+target_include_directories(PointLib PUBLIC
+							"${PROJECT_BINARY_DIR}"
+							"${PROJECT_SOURCE_DIR}/lib/point_lib")
+
+target_include_directories(OperationsLib PUBLIC
+							"${PROJECT_BINARY_DIR}"
+							"${PROJECT_SOURCE_DIR}/lib/operations_lib")
 
 
