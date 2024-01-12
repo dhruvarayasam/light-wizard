@@ -1,8 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include "Config.h"
-#include "../lib/ray_lib/ray.h"
-
 
 using std::cout;
 using std::endl;
@@ -23,7 +21,7 @@ int main(void) {
                                                                                                    
 )" << "\n";
 
-	cout << R"(                  .
+	cout << R"(           .
 
                    .
          /^\     .
@@ -40,13 +38,9 @@ int main(void) {
   |    l  I   \.     ,/
 _/j  L l\_!  _//^---^\\_ )" << "\n";
 
-	cout << "\n\033[31m\e[1mVersion " << VERSION_MAJOR << "." << VERSION_MINOR << "\e[0m\n";
+	cout << "\n\033[31m\e[1mVersion " << VERSION_MAJOR << "." << VERSION_MINOR <<  " by dhruva rayasam" << "\e[0m\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
-	
-	Ray r1 {Point {3, 3, 3}, Point {4, 4, 4} };
-
-	cout << r1 << endl;
 
 	// IMAGE
 /*	
