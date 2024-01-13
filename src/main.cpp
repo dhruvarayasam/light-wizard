@@ -43,17 +43,13 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
 
-	Vec3 v1 {1.2, 2, 3};
-	Vec3 v2 {4.5, 5, 6};
+	Vec3 v1 {1.2345, 2.2398, 3.13987};
+	Vec3 v2 {4.52398, 5.21938, 6.239874};
 
-	Vec3 v3 = v1 + v1;
-	double dot_prod = v1 * v1;
-	Vec3 v4 = 3 * v1;
+	Vec3 v3 = v1 + v2;
 
-	cout << "V3: " << v3 << "\n";
+	cout << v3 << endl;
 
-	cout << "Dot product: " << dot_prod << endl;
-	cout << "Multiplication by a constant: " << v4 << endl;
 
 
 	// IMAGE

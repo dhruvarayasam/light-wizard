@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-
 /*
 
 Vec3 class to handle vectors and vector operations. Essentially a wrapper for a location in 3D space (x, y, z).
@@ -20,6 +19,13 @@ class Vec3 {
     public:
         Vec3();
         Vec3(double a, double b, double c);
+
+        // functions 
+
+        Vec3 normalize();
+        double get_magnitude();
+        double round();
+
 
         // operator overloads
         friend std::ostream& operator<< (std::ostream& os, const Vec3& a);
