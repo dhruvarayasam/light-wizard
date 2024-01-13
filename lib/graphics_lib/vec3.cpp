@@ -103,7 +103,7 @@ Vec3 Vec3::normalize() {
 
 }
 
-double Vec3::round() {
+void Vec3::round() {
 
     this->x = Operations::round_to(this->x, PRECISION_CONSTANT);
     this->y = Operations::round_to(this->y, PRECISION_CONSTANT);

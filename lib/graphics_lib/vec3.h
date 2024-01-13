@@ -24,7 +24,7 @@ class Vec3 {
 
         Vec3 normalize();
         double get_magnitude();
-        double round();
+        void round();
 
 
         // operator overloads
@@ -33,8 +33,5 @@ class Vec3 {
         friend Vec3 operator- (const Vec3& a, const Vec3& b);
         friend double operator* (const Vec3& a, const Vec3& b); // dot product
         friend Vec3 operator* (const double& a, const Vec3& b); // vector times a constant
-
-
-
 
 };

@@ -15,7 +15,6 @@ std::ostream& operator<< (std::ostream& os, const Ray& a) {
 
     return os;
 
-
 }
 
 
