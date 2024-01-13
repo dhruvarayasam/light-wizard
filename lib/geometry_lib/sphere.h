@@ -18,6 +18,7 @@ class Sphere {
     double refractive_ind;
     double luminosity;
     int opacity;
+    int color; // represented in hexadecimal
 
     public:
         Sphere();

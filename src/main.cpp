@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "Config.h"
+#include "../lib/graphics_lib/vec3.h"
 
 using std::cout;
 using std::endl;
@@ -38,9 +39,22 @@ int main(void) {
   |    l  I   \.     ,/
 _/j  L l\_!  _//^---^\\_ )" << "\n";
 
-	cout << "\n\033[31m\e[1mVersion " << VERSION_MAJOR << "." << VERSION_MINOR <<  " by dhruva rayasam" << "\e[0m\n";
+	cout << "\n\033[31m\e[1mVersion " << VERSION_MAJOR << "." << VERSION_MINOR <<  " by Dhruva Rayasam" << "\e[0m\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
+
+	Vec3 v1 {1.2, 2, 3};
+	Vec3 v2 {4.5, 5, 6};
+
+	Vec3 v3 = v1 + v1;
+	double dot_prod = v1 * v1;
+	Vec3 v4 = 3 * v1;
+
+	cout << "V3: " << v3 << "\n";
+
+	cout << "Dot product: " << dot_prod << endl;
+	cout << "Multiplication by a constant: " << v4 << endl;
+
 
 	// IMAGE
 /*	
