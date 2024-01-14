@@ -1,6 +1,5 @@
 #pragma once
 
-
 /*
 
 Contains initialization information for a Sphere. Has radius,
@@ -12,17 +11,14 @@ Luminosity and opacity are on a scale from 0 to 1.
 
 */
 
-class Sphere {
-
+class Sphere
+{
     double radius;
     double refractive_ind;
-    double luminosity;
-    int opacity;
-    int color; // represented in hexadecimal
+    double luminosity; //
+    int opacity;       // on a scale of 1-100
+    int color;         // represented in hexadecimal
 
-    public:
-        Sphere();
-        Sphere(double rad, double ref, double lum, int op);
-
-
+public:
+    Sphere(double rad, double ref, double lum, int op, int col);
 };

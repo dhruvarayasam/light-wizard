@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include "Config.h"
-#include "../lib/graphics_lib/vec3.h"
+#include "../lib/graphics_lib/camera.h"
+#include "../lib/graphics_lib/scene.h"
 
 using std::cout;
 using std::endl;
@@ -43,13 +44,10 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
 
-	Vec3 v1 {1.2345, 2.2398, 3.13987};
-	Vec3 v2 {4.52398, 5.21938, 6.239874};
+	Scene s;
+	Camera c {1920, 1080, s};
 
-	Vec3 v3 = v1 + v2;
 	
-	v3 = 4 * v3;
-	cout << v3 << endl;
 
 
 

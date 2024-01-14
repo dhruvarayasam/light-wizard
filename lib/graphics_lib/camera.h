@@ -1,4 +1,5 @@
-
+#pragma once
+#include "scene.h"
 /*
 
 This class handles functionality for the camera witnessing the scene. The camera will take in a Scene
@@ -12,5 +13,8 @@ class Camera {
 
     int res_length;
     int res_width;
+    Scene scene;
 
+    public:
+        Camera(int length, int width, Scene s);
 };
