@@ -10,5 +10,8 @@ Camera::Camera(int length, int width, Scene s) : res_length(length), res_width(w
 
 }
 
+bool trace() {
+    
+}
 
 

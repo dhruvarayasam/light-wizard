@@ -44,9 +44,6 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
 
-	Scene s;
-	Camera c {1920, 1080, s};
-
 	
 
 
