@@ -3,6 +3,7 @@
 #include "Config.h"
 #include "../lib/graphics_lib/camera.h"
 #include "../lib/graphics_lib/scene.h"
+#include "../lib/graphics_lib/vec3.h"
 
 using std::cout;
 using std::endl;
@@ -44,9 +45,12 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
 
-	
+	Vec3 v1{1, 2, 3};
+    Vec3 v2{2, 3, 4};
 
+    Vec3 v3 = v1 + v2;
 
+    cout << v3 << endl;
 
 	// IMAGE
 /*	

@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.28.1)
 project(LightWizard VERSION 0.1) # version number and project title
+include(CTest)
+
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -42,3 +44,19 @@ target_include_directories(GeometryLib PUBLIC
 target_include_directories(GraphicsLib PUBLIC
 							"${PROJECT_BINARY_DIR}"
 							"${PROJECT_SOURCE_DIR}/lib/graphics_lib")
+
+
+# binaries for testing
+add_executable(vec_test_1 ${PROJECT_SOURCE_DIR}/tests/src/vec_test_1.cpp)
+target_link_libraries(vec_test_1 GraphicsLib OperationsLib)
+
+set_target_properties(vec_test_1
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/tests/exec")
+
+enable_testing()
+
+add_test(
+	NAME vec_test_1
+	COMMAND ${PROJECT_SOURCE_DIR}/tests/exec/vec_test_1
+)

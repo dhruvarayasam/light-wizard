@@ -27,7 +27,10 @@ Vec3 operator+ (const Vec3& a, const Vec3& b) {
     c.y = a.y + b.y;
     c.z = a.z + b.z;
 
+    std::cout << "here in the function\n" << std::endl;
+
     c.round();
+    std::cout << c << std::endl;
 
     return c;
 }
@@ -71,6 +74,16 @@ Vec3 operator* (const double& a, const Vec3& b) {
 
     return c;
 
+
+}
+
+bool operator== (const Vec3& a, const Vec3& b) {
+
+    bool x_bool = a.x == b.x;
+    bool y_bool = a.y == b.y;
+    bool z_bool = a.z == b.z;
+
+    return x_bool && y_bool && z_bool;
 
 }
 

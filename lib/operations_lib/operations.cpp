@@ -5,9 +5,10 @@
 namespace Operations
 {
 
-    double round_to(double value, double precision = 1.0)
+    double round_to(double value, double precision = 0.001)
     {
-        return std::round(value / precision) * precision;
+        double res = std::round(value / precision) * precision;
+        return res;
     }
 
     

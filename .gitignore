@@ -3,3 +3,4 @@ bin/
 build/
 .ycm_extra_conf.py
 .cache/
+tests/exec
