@@ -47,16 +47,18 @@ target_include_directories(GraphicsLib PUBLIC
 
 
 # binaries for testing
-add_executable(vec_test_1 ${PROJECT_SOURCE_DIR}/tests/src/vec_test_1.cpp)
-target_link_libraries(vec_test_1 GraphicsLib OperationsLib)
 
-set_target_properties(vec_test_1
+# vector testing
+add_executable(operator_overloads ${PROJECT_SOURCE_DIR}/tests/src/vec_tests/op_overl_test.cpp)
+target_link_libraries(operator_overloads GraphicsLib OperationsLib)
+
+set_target_properties(operator_overloads
     PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/tests/exec")
+    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/tests/exec/vec_tests")
 
 enable_testing()
 
 add_test(
-	NAME vec_test_1
-	COMMAND ${PROJECT_SOURCE_DIR}/tests/exec/vec_test_1
+	NAME operator_overloads
+	COMMAND ${PROJECT_SOURCE_DIR}/tests/exec/vec_tests/operator_overloads
 )

@@ -45,13 +45,6 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
 
-	Vec3 v1{1, 2, 3};
-    Vec3 v2{2, 3, 4};
-
-    Vec3 v3 = v1 + v2;
-
-    cout << v3 << endl;
-
 	// IMAGE
 /*	
 	int image_width = 1920;

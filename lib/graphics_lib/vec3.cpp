@@ -87,10 +87,45 @@ bool operator== (const Vec3& a, const Vec3& b) {
 
 }
 
+bool operator!= (const Vec3& a, const Vec3& b) {
+
+    bool x_bool = a.x == b.x;
+    bool y_bool = a.y == b.y;
+    bool z_bool = a.z == b.z;
+
+    return !x_bool || !y_bool || !z_bool;
+
+}
+
+
+bool operator < (const Vec3& a, const Vec3& b) {
+
+    return a.get_magnitude() < b.get_magnitude();
+
+}
+
+bool operator > (const Vec3& a, const Vec3& b) {
+
+    return a.get_magnitude() > b.get_magnitude();
+
+}
+
+bool operator <= (const Vec3& a, const Vec3& b) {
+
+    return a.get_magnitude() <= b.get_magnitude();
+
+}
+
+bool operator >= (const Vec3& a, const Vec3& b) {
+
+    return a.get_magnitude() >= b.get_magnitude();
+
+}
+
 
 // class methods
 
-double Vec3::get_magnitude() {
+double Vec3::get_magnitude() const {
 
     double res = sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2));
 
