@@ -1,6 +1,8 @@
 #include <iostream>
 #include "../../lib/graphics_lib/vec3.h"
+#include "../../lib/operations_lib/operations.h"
 #include <assert.h>
+#include "Config.h"
 
 using std::cout;
 using std::endl;
@@ -11,8 +13,7 @@ Tests simple addition and equality operators.
 
 
 
-int main(void)
-{
+int main(void) {
 
     // addition tests
     Vec3 v1{1, 2, 3};
@@ -53,14 +54,14 @@ int main(void)
     assert(res2 == 96);
 
     // comparison operators
-    // Vec3 comp1 {1,2,3};
-    // Vec3 comp2 {4, 5, 6};
+    Vec3 comp1 {1,2,3};
+    Vec3 comp2 {4, 5, 6};
 
-    // assert(!(comp1 == comp2)); // not equals
+    assert(!(comp1 == comp2)); // not equals
 
-    // Vec3 comp3 {1, 2, 3};
+    Vec3 comp3 {1, 2, 3};
 
-    // assert(comp1 == comp3); // equals
+    assert(comp1 == comp3); // equals
 
     Vec3 comp4 {1, 1, 1}; // greater than/less than
     Vec3 comp5 {2, 2, 2};
@@ -72,12 +73,16 @@ int main(void)
 
     assert (comp4 <= comp7);
     assert (comp6 >= comp7);
+
+    Vec3 comp8 {1.1, 4.5, 8.79879};
     
-
-    
-
+    assert(comp8 > comp4);
 
 
+    double mega_dot_prod = ((comp4 * comp5) + (comp6 * comp7) + (comp8 * comp1));
+    mega_dot_prod = Operations::round_to(mega_dot_prod, PRECISION_CONSTANT);
+
+    assert (mega_dot_prod == 51.496);
 
 
     return 0;
