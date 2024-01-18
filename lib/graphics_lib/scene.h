@@ -1,17 +1,18 @@
 #pragma once
 #include "../geometry_lib/sphere.h"
 #include <iostream>
-#include <memory>
+#include <vector>
 
-using std::unique_ptr;
+using std::vector;
+
 
 class Scene {
 
-    // unique_ptr<Sphere> geometry; // pointer to dynamically allocated array of geometry in the scene
-
+    vector<const Sphere&> geometry; 
     void validate_geometry();
 
     public:
-        // Scene(unique_ptr<Sphere> geo); // constructor
+        Scene();
+        Scene(vector<const Sphere&> geo); // constructor
 
 };
