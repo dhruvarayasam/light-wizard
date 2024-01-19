@@ -15,6 +15,7 @@ class Vec3 {
     double y;
     double z;
 
+    void round();
 
     public:
         Vec3();
@@ -24,7 +25,6 @@ class Vec3 {
 
         Vec3 normalize();
         double get_magnitude() const;
-        void round();
 
 
         // operator overloads

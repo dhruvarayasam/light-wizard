@@ -14,11 +14,18 @@ Luminosity and opacity are on a scale from 0 to 1.
 class Sphere
 {
     double radius;
-    double refractive_ind;
-    double luminosity; //
-    int opacity;       // on a scale of 1-100
+    double refractive_ind; // this has to be zero if opacity is at 100
+    int opacity;       // on a scale of 1-100, where 100 is completely untransparent and 1 is most transparent
     int color;         // represented in hexadecimal
+    int reflectivity; // on a measure of 0-100, where 0 is not reflective at all and 100 is most reflective
+    
 
 public:
-    Sphere(double rad, double ref, double lum, int op, int col);
+    Sphere(double rad, double ref, int op, int col, int refle);
+
+    double get_radius();
+    double get_refractive_ind();
+    int get_opacity();
+    int get_color();
+    int get_reflectivity();
 };

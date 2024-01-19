@@ -19,12 +19,13 @@ class Camera {
         Camera(int length, int width, Scene s);
 
         /*
-        using the scene class attribute, it shoots rays
-        into the scene and calculates each pixel's color
-        based on what the ray hits. from a high level, utilizes the intersection() 
-        function in the Operations namespace to see if the ray hits anything.
-        if so, calculates path ray must take to the light source and sees 
-        if the pixel should be shaded or in light. 
+        This is where the magic happens. Rays are shot into the scene,
+        and their colors are mixed and calculated here to set the color
+        of the particular pixel that the original ray was shot from. It then outputs
+        the color of the pixel to a seperate function, which writes that pixel
+        to an actual PPM file. 
         */
-        bool trace();
+        void render();
+
+
 };

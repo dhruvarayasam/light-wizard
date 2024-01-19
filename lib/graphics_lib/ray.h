@@ -6,6 +6,7 @@ class Ray {
 
     Vec3 orig;
     Vec3 dest; // should be normalized
+    int color; // represented in hexadecimal format. 
 
     public:
         Ray();
