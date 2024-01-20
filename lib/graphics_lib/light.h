@@ -9,6 +9,10 @@ class Light {
     public:
         Light(int lum);
 
+        // class methods
+        int get_luminosity();
+        const Vec3& get_position() const;
+
         
 
 

@@ -50,7 +50,7 @@ target_include_directories(GraphicsLib PUBLIC
 
 # vector testing
 add_executable(operator_overloads ${PROJECT_SOURCE_DIR}/tests/src/vec_tests/op_overl_test.cpp)
-target_link_libraries(operator_overloads GraphicsLib OperationsLib)
+target_link_libraries(operator_overloads GraphicsLib GeometryLib OperationsLib)
 
 set_target_properties(operator_overloads
     PROPERTIES

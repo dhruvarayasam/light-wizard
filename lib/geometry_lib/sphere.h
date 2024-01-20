@@ -1,4 +1,5 @@
 #pragma once
+#include "geometry.h"
 
 /*
 
@@ -11,7 +12,7 @@ Luminosity and opacity are on a scale from 0 to 1.
 
 */
 
-class Sphere
+class Sphere : public Geometry
 {
     double radius;
     double refractive_ind; // this has to be zero if opacity is at 100
@@ -28,4 +29,5 @@ public:
     int get_opacity();
     int get_color();
     int get_reflectivity();
+    bool intersect();
 };

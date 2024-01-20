@@ -50,6 +50,8 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 	int res_width = 0;
 
 
+
+
 	// IMAGE
 /*	
 	int image_width = 1920;

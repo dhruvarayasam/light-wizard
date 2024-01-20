@@ -32,7 +32,31 @@ namespace Operations
 
     int trace(const Ray& ray, const Vec3& poi, shared_ptr<Scene> scene_ptr) {
 
-        const Light& prim_light = scene_ptr->get_primary_light();
+        const Light& prim_light = scene_ptr->get_primary_light(); // get primary light source reference
+        const vector<shared_ptr<Geometry>>& scene_geom = scene_ptr->get_geometry();
+
+        Vec3 prim_light_pos = prim_light.get_position(); // get the position of the prim light source
+        Vec3 vec_to_light = prim_light_pos - poi; // get vector that points in direction of the light
+        Ray cast_ray {poi, prim_light_pos}; // ray that is casted from intersection point to light source
+
+        /*
+        
+        As part of the tracing mechanism, we need to now extend this vector to the light source.
+        If it intersects w/ any geometry, we need to determine if its a reflective/refractive object.
+        If that is the case, calculate new vectors and recurse. Otherwise, we can determine that the pixel
+        is in shadow. 
+        
+        */
+
+       /*
+       iterate through the geometry and see if our ray intersects with anything. out of the
+       intersected geometry, determine which intersection is closest.
+       */
+
+      
+
+
+
 
         return 0;
     }

@@ -2,6 +2,13 @@
 #include <iostream>
 #include "vec3.h"
 
+
+/*
+The Ray class is a wrapper for the O+tD format
+for representing vectors with an origin and direction vector.
+Parameter is assumed to be 1. Direction vector will be normalized
+by default.
+*/
 class Ray {
 
     Vec3 orig;
