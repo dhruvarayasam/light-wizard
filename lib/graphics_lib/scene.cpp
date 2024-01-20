@@ -9,17 +9,6 @@ using std::cout;
 
 // constructors
 
-Scene::Scene() {
-
-    vector<shared_ptr<Sphere>> geom {};
-
-    this->background_color = 0x87CEEB;
-    this->plane_position = 0;
-    this->geometry = geom; 
-
-
-}
-
 Scene::Scene(int back_col, int plane_pos , vector<shared_ptr<Sphere>> geo, Light prim_light) : background_color(back_col), plane_position(plane_pos), geometry(geo), primary_light(prim_light){}
 
 
@@ -32,6 +21,23 @@ bool validate_geometry (vector<const Sphere&> geo) {
     // since geometry only contains spheres so far, we can assume that all geometry are spheres
 
     return true;
+
+}
+
+const vector<shared_ptr<Sphere>>& Scene::get_geometry() {
+
+    const vector<shared_ptr<Sphere>>& ret_val = this->geometry;
+
+    return ret_val;
+
+}
+
+const Light& Scene::get_primary_light() {
+
+
+    const Light& ret_val = primary_light;
+
+    return ret_val;
 
 }
 

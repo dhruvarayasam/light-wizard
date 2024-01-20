@@ -1,22 +1,24 @@
 #pragma once
 #include "scene.h"
-/*
+#include <memory>
 
+using std::shared_ptr;
+
+/*
 This class handles functionality for the camera witnessing the scene. The camera will take in a Scene
 object, which contains all validated geometry and planes, as well as resolution specifications for the output image.
 It then shoots rays into the scene, testing for intersections (defined by the operations library) and setting the color of 
 each pixel of the image.
-
 */
 
 class Camera {
 
     int res_length;
     int res_width;
-    Scene scene;
+    shared_ptr<Scene> scene;
 
     public:
-        Camera(int length, int width, Scene s);
+        Camera(int length, int width, shared_ptr<Scene> s);
 
         /*
         This is where the magic happens. Rays are shot into the scene,

@@ -21,8 +21,10 @@ class Scene {
 
     public:
 
-        Scene();
         Scene(int back_col, int plane_pos, vector<shared_ptr<Sphere>> geo, Light prim_light); // constructor
+
+        const vector<shared_ptr<Sphere>>& get_geometry();
+        const Light& get_primary_light();
 
 
 

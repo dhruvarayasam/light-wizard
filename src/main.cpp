@@ -45,6 +45,11 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 
 	cout << "\nArtwork credit: Row on ASCII Art Archive\n" << endl;
 
+
+	int res_height = 0;
+	int res_width = 0;
+
+
 	// IMAGE
 /*	
 	int image_width = 1920;
