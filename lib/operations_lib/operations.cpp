@@ -1,23 +1,19 @@
-#include <iostream>
 #include <math.h>
-#include <vector>
 #include "operations.h"
-#include "../graphics_lib/ray.h"
-#include "../graphics_lib/vec3.h"
-#include "../graphics_lib/scene.h"
-
+#include "Config.h"
 
 using std::vector;
 using std::cout; 
 using std::endl;
+using std::shared_ptr;
 
 namespace Operations
 {
 
-    double round_to(double value, double precision = 0.001)
+    double round_to(double value)
     {
-        double res = std::round(value / precision);
-        res = res * precision;
+        double res = std::round(value / PRECISION_CONSTANT);
+        res = res * PRECISION_CONSTANT;
         return res;
     }
 
@@ -38,6 +34,15 @@ namespace Operations
         Vec3 prim_light_pos = prim_light.get_position(); // get the position of the prim light source
         Vec3 vec_to_light = prim_light_pos - poi; // get vector that points in direction of the light
         Ray cast_ray {poi, prim_light_pos}; // ray that is casted from intersection point to light source
+
+        for (shared_ptr<Geometry> g : scene_geom) {
+
+            if (g->intersect(cast_ray)) {
+                
+            }
+
+        }
+
 
         /*
         

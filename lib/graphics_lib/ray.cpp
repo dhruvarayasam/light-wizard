@@ -17,5 +17,22 @@ std::ostream& operator<< (std::ostream& os, const Ray& a) {
 
 }
 
+Vec3 Ray::get_orig() {
+
+    return this->orig;
+
+}
+
+Vec3 Ray::get_dest() {
+
+    return this->dest;
+
+}
+
+int Ray::get_color() {
+
+    return this->color;
+
+}
 
 

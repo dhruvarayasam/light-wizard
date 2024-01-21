@@ -22,5 +22,11 @@ class Ray {
         // operator overloads
         friend std::ostream& operator << (std::ostream& os, const Ray& a);
 
+        // class methods
+
+        Vec3 get_orig();
+        Vec3 get_dest();
+        int get_color();
+
 };
 

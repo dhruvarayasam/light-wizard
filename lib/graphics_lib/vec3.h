@@ -20,6 +20,12 @@ class Vec3 {
     public:
         Vec3();
         Vec3(double a, double b, double c);
+        void set_x(double a);
+        void set_y(double a);
+        void set_z(double a);
+        double get_x();
+        double get_y();
+        double get_z();
 
         // functions 
 

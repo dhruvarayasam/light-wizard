@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
+#include <memory>
+#include <vector>
 #include "../graphics_lib/vec3.h"
 #include "../graphics_lib/ray.h"
-#include "../geometry_lib/sphere.h"
 #include "../graphics_lib/scene.h"
 
 /*
@@ -18,7 +19,7 @@ using std::shared_ptr;
 namespace Operations {
 
     // rounds the value to the specified precision 
-    double round_to (double value, double precision);
+    double round_to (double value);
 
     // This method returns true if a and b point in the same direction; i.e, if their components line up.
     bool verify_direct(const Ray& a, const Ray& b);

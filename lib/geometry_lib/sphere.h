@@ -1,5 +1,7 @@
 #pragma once
 #include "geometry.h"
+#include <memory>
+#include "../operations_lib/operations.h"
 
 /*
 
@@ -14,6 +16,7 @@ Luminosity and opacity are on a scale from 0 to 1.
 
 class Sphere : public Geometry
 {
+    Vec3 center;
     double radius;
     double refractive_ind; // this has to be zero if opacity is at 100
     int opacity;       // on a scale of 1-100, where 100 is completely untransparent and 1 is most transparent
@@ -22,12 +25,15 @@ class Sphere : public Geometry
     
 
 public:
-    Sphere(double rad, double ref, int op, int col, int refle);
+    Sphere(Vec3 cent, double rad, double ref, int op, int col, int refle);
 
     double get_radius();
     double get_refractive_ind();
     int get_opacity();
     int get_color();
     int get_reflectivity();
-    bool intersect();
+
+
+
+    shared_ptr<Vec3> intersect(Ray ray);
 };

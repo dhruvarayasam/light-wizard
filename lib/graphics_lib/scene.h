@@ -1,5 +1,4 @@
 #pragma once
-#include "../geometry_lib/sphere.h"
 #include "light.h"
 #include "../geometry_lib/geometry.h"
 #include <vector>

@@ -80,7 +80,7 @@ int main(void) {
 
 
     double mega_dot_prod = ((comp4 * comp5) + (comp6 * comp7) + (comp8 * comp1));
-    mega_dot_prod = Operations::round_to(mega_dot_prod, PRECISION_CONSTANT);
+    mega_dot_prod = Operations::round_to(mega_dot_prod);
 
     assert (mega_dot_prod == 51.496);
 
