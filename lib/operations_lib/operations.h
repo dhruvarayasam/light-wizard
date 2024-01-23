@@ -25,23 +25,27 @@ namespace Operations {
     bool verify_direct(const Ray& a, const Ray& b);
 
 
-     /* 
-    The trace function returns a color, represented in hex format.
-    The trace function takes in a ray/scene object and traces a new ray from the
-    point of intersection to the light source. Depending on whether it is blocked
-    or other conditions, the trace function will return a color represented in hex format.
+    // This method calculates the distance between two points.
+    double calculate_distance(Vec3 vec1, Vec3 vec2);
 
-    Parameters: const Ray reference, const Vec3 reference and a const Scene reference.
-    */
-    int trace(const Ray& ray, const Vec3& poi, shared_ptr<Scene> scene_ptr);
-
+    shared_ptr<Vec3> closest_intersection(Ray& ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom);
 
 
     /*
-    Given a file stream parameter and a color given in hex format, this function
-    appends to the file the color values for that particular pixel. Returns true if
-    file output was successful, or an error occured while trying to write.
+    This function calculates and returns the refracted ray that exits the piece of intersected geometry.
     */
-    bool output_to_file(std::ofstream& file, int color);
+    Ray refraction_result_ray(Ray incident, shared_ptr<Geometry> intersected_geom);
+
+    /*
+    This function calculates and returns the reflected ray that exits the piece of intersected geometry.
+    */
+    Ray reflection_result_ray(Ray incident, shared_ptr<Geometry> intersected_geom);
+
+    /*
+    This method computes the intensity of light that should be shed on a particular point
+    given the default intensity of the light source and the point of intersection, i.e the point
+    we are trying to shade.
+    */
+    u_int32_t compute_intensity(u_int32_t default_light_intensity, Vec3 poi);
     
 }

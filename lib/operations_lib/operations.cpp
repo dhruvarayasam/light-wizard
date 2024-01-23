@@ -2,10 +2,10 @@
 #include "operations.h"
 #include "Config.h"
 
-using std::vector;
-using std::cout; 
+using std::cout;
 using std::endl;
 using std::shared_ptr;
+using std::vector;
 
 namespace Operations
 {
@@ -17,61 +17,83 @@ namespace Operations
         return res;
     }
 
+    shared_ptr<Vec3> closest_intersection(Ray& ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom)
+    {
 
+        const vector<shared_ptr<Geometry>> &scene_geom = scene_ptr->get_geometry();
 
-    /*
-    This function will take a ray and will attempt to trace a path to the light
-    source provided in the scene object. If it is blocked yet again, then that point will
-    be in shadow and it will return a color code in hex format for the camera.render method
-    to pass off and process into a pixel. 
-    */
-
-    int trace(const Ray& ray, const Vec3& poi, shared_ptr<Scene> scene_ptr) {
-
-        const Light& prim_light = scene_ptr->get_primary_light(); // get primary light source reference
-        const vector<shared_ptr<Geometry>>& scene_geom = scene_ptr->get_geometry();
-
-        Vec3 prim_light_pos = prim_light.get_position(); // get the position of the prim light source
-        Vec3 vec_to_light = prim_light_pos - poi; // get vector that points in direction of the light
-        Ray cast_ray {poi, prim_light_pos}; // ray that is casted from intersection point to light source
+        shared_ptr<Vec3> ret_val;
+        double distance = MAXFLOAT;
 
         for (shared_ptr<Geometry> g : scene_geom) {
 
-            if (g->intersect(cast_ray)) {
-                
-            }
+            shared_ptr<Vec3> poi = g->intersect(ray); // get intersection point
+            
+            // calculate minimum intersection
+            if (poi != NULL) {
 
+                double intersection_distance = calculate_distance(*poi, ray.get_orig());
+
+                if (distance < intersection_distance) {
+
+                    distance = intersection_distance;
+
+                    ret_val = poi;
+
+                    intersected_geom = g;
+
+                }
+
+            }
+            
         }
 
+        return ret_val;
+
+
+    }
+
+    double calculate_distance(Vec3 vec0, Vec3 vec1) {
+
+        double x = vec1.get_x() - vec0.get_x();
+        double y = vec1.get_y() - vec0.get_y();
+        double z = vec1.get_z() - vec0.get_z();
+
+        double result = sqrt((x*x) + (y*y) + (z*z));
+
+        result = round_to(result);
+
+        return result;
+
+    }
+
+
+
+    Ray refraction_result_ray(Ray incident, shared_ptr<Geometry> intersected_geom) {
+
+        
+
+    }
+
+    Ray reflection_result_ray(Ray incident, shared_ptr<Geometry> intersected_geom) {
+
+    }
+
+    u_int32_t compute_intensity(u_int32_t default_light_intensity, Vec3 poi, Light light_src, shared_ptr<Geometry> intersected_geom) {
 
         /*
-        
-        As part of the tracing mechanism, we need to now extend this vector to the light source.
-        If it intersects w/ any geometry, we need to determine if its a reflective/refractive object.
-        If that is the case, calculate new vectors and recurse. Otherwise, we can determine that the pixel
-        is in shadow. 
-        
+        computes normal
+        based on the angle between the normal and the light source, return the level of brightness that that point is
+        experiencing
         */
 
-       /*
-       iterate through the geometry and see if our ray intersects with anything. out of the
-       intersected geometry, determine which intersection is closest.
-       */
+       double dot = poi * light_src.get_position();
+       double mag_product = poi.get_magnitude() * light_src.get_position().get_magnitude();
 
-      
+       double angle = acos(dot / mag_product);
 
+       
 
-
-
-        return 0;
     }
-
-    bool output_to_file(std::ofstream& file, int color) {
-        return true;
-    }
-
-
-
-    
 
 }

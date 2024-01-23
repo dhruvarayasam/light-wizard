@@ -18,22 +18,21 @@ class Sphere : public Geometry
 {
     Vec3 center;
     double radius;
-    double refractive_ind; // this has to be zero if opacity is at 100
     int opacity;       // on a scale of 1-100, where 100 is completely untransparent and 1 is most transparent
-    int color;         // represented in hexadecimal
-    int reflectivity; // on a measure of 0-100, where 0 is not reflective at all and 100 is most reflective
     
 
 public:
-    Sphere(Vec3 cent, double rad, double ref, int op, int col, int refle);
+    Sphere(Vec3 cent, double rad, double ref, int op, u_int32_t col, bool refle);
 
     double get_radius();
-    double get_refractive_ind();
     int get_opacity();
-    int get_color();
-    int get_reflectivity();
 
 
-
+    // inherited methods
     shared_ptr<Vec3> intersect(Ray ray);
+    bool get_reflective();
+    double get_refractive_ind();
+    u_int32_t get_color();
+    Vec3 calculate_normal(Vec3 poi);
+    Ray calculate_normal_ray(Vec3 poi);
 };

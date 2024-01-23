@@ -4,18 +4,18 @@
 using std::shared_ptr;
 using std::make_shared;
 
-Sphere::Sphere(Vec3 cent, double rad, double ref, int op, int col, int refle) : radius(rad), refractive_ind(ref), opacity(op), color(col), reflectivity(refle), center(cent) {}
+Sphere::Sphere(Vec3 cent, double rad, double ref, int op, u_int32_t col, bool refle) : radius(rad), opacity(op), center(cent) {
+
+    this->reflective = refle;
+    this->refractive_ind = ref;
+    this->color = col;
+
+}
 
 double Sphere::get_radius()
 {
 
     return this->radius;
-}
-
-double Sphere::get_refractive_ind()
-{
-
-    return this->refractive_ind;
 }
 
 int Sphere::get_opacity()
@@ -24,15 +24,10 @@ int Sphere::get_opacity()
     return this->opacity;
 }
 
-int Sphere::get_color()
+u_int32_t Sphere::get_color()
 {
 
     return this->color;
-}
-
-int Sphere::get_reflectivity()
-{
-    return this->reflectivity;
 }
 
 shared_ptr<Vec3> Sphere::intersect(Ray ray)
@@ -126,4 +121,39 @@ shared_ptr<Vec3> Sphere::intersect(Ray ray)
     }
 
     return ret_ptr;
+}
+
+bool Sphere::get_reflective() {
+
+    return this->reflective;
+
+}
+
+double Sphere::get_refractive_ind() {
+
+    return this->refractive_ind;
+
+}
+
+Vec3 Sphere::calculate_normal(Vec3 poi) {
+
+    Vec3 normal_vec = poi - this->center;
+
+    return normal_vec;
+
+}
+
+Ray Sphere::calculate_normal_ray(Vec3 poi) {
+
+    // first get center of sphere
+    // then subtract center of sphere from poi --> this gives us vector from poi to center
+    // then multiply by -1 to get our destination vector from poi --> dest will normalize automatically
+
+    Vec3 poi_to_center = this->center - poi;
+    Vec3 poi_to_world = -1*poi_to_center;
+
+    Ray ret_val {poi, poi_to_world};
+
+    return ret_val;
+
 }
