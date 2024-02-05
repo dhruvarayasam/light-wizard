@@ -17,13 +17,13 @@ namespace Operations
         return res;
     }
 
-    shared_ptr<Vec3> closest_intersection(Ray& ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom)
+    shared_ptr<Vec3> closest_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom)
     {
 
         const vector<shared_ptr<Geometry>> &scene_geom = scene_ptr->get_geometry();
 
         shared_ptr<Vec3> ret_val;
-        double distance = MAXFLOAT;
+        double distance = 100000000;
 
         for (shared_ptr<Geometry> g : scene_geom) {
 
@@ -79,21 +79,22 @@ namespace Operations
 
     }
 
-    u_int32_t compute_intensity(u_int32_t default_light_intensity, Vec3 poi, Light light_src, shared_ptr<Geometry> intersected_geom) {
+    bool solve_quadratic(const double &a, const double &b, const double &c, double &x0, double &x1) {
+        float discr = b * b - 4 * a * c;
+        if (discr < 0)
+            return false;
+        else if (discr == 0)
+            x0 = x1 = -0.5 * b / a;
+        else
+        {
+            float q = (b > 0) ? -0.5 * (b + sqrt(discr)) : -0.5 * (b - sqrt(discr));
+            x0 = q / a;
+            x1 = c / q;
+        }
+        if (x0 > x1)
+            std::swap(x0, x1);
 
-        /*
-        computes normal
-        based on the angle between the normal and the light source, return the level of brightness that that point is
-        experiencing
-        */
-
-       double dot = poi * light_src.get_position();
-       double mag_product = poi.get_magnitude() * light_src.get_position().get_magnitude();
-
-       double angle = acos(dot / mag_product);
-
-       
-
+        return true;
     }
 
 }

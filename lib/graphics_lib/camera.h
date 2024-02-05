@@ -20,7 +20,7 @@ class Camera
     int res_length;
     int res_width;
     shared_ptr<Scene> scene;
-    Vec3 pos{0.5, 1, 0.5};
+    Vec3 pos{960, -250, 540};
     std::ofstream file; 
 
 public:

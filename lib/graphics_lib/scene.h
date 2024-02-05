@@ -27,8 +27,5 @@ class Scene {
 
         const vector<shared_ptr<Geometry>>& get_geometry();
         const Light& get_primary_light();
-
-
-
-
+        
 };

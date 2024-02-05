@@ -45,7 +45,7 @@ const vector<shared_ptr<Geometry>>& Scene::get_geometry() {
 const Light& Scene::get_primary_light() {
 
 
-    const Light& ret_val = primary_light;
+    const Light& ret_val = this->primary_light;
 
     return ret_val;
 

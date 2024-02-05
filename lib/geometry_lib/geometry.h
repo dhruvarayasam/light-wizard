@@ -2,6 +2,7 @@
 #include <memory>
 #include "../graphics_lib/ray.h"
 #include "../graphics_lib/vec3.h"
+#include "../graphics_lib/light.h"
 
 using std::shared_ptr;
 
@@ -28,4 +29,5 @@ public:
     virtual u_int32_t get_color() = 0;
     virtual Vec3 calculate_normal(Vec3 poi) = 0;
     virtual Ray calculate_normal_ray(Vec3 poi) = 0;
+    virtual u_int32_t compute_reflected_color(Vec3 poi, Light light_src) = 0;
 };

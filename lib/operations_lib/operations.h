@@ -18,6 +18,7 @@ using std::shared_ptr;
 
 namespace Operations {
 
+
     // rounds the value to the specified precision 
     double round_to (double value);
 
@@ -28,7 +29,7 @@ namespace Operations {
     // This method calculates the distance between two points.
     double calculate_distance(Vec3 vec1, Vec3 vec2);
 
-    shared_ptr<Vec3> closest_intersection(Ray& ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom);
+    shared_ptr<Vec3> closest_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom);
 
 
     /*
@@ -47,5 +48,12 @@ namespace Operations {
     we are trying to shade.
     */
     u_int32_t compute_intensity(u_int32_t default_light_intensity, Vec3 poi);
+
+    /*
+    Solves quadratic and determines ray parameters for ray intersections, whether it be in one, 2 or no
+    places.
+    */
+
+   bool solve_quadratic(const double &a, const double &b, const double &c, double &x0, double &x1);
     
 }

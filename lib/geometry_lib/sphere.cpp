@@ -1,15 +1,15 @@
 #include "sphere.h"
 #include <cmath>
 
-using std::shared_ptr;
 using std::make_shared;
+using std::shared_ptr;
 
-Sphere::Sphere(Vec3 cent, double rad, double ref, int op, u_int32_t col, bool refle) : radius(rad), opacity(op), center(cent) {
+Sphere::Sphere(Vec3 cent, double rad, double ref, int op, u_int32_t col, bool refle) : radius(rad), opacity(op), center(cent)
+{
 
     this->reflective = refle;
     this->refractive_ind = ref;
     this->color = col;
-
 }
 
 double Sphere::get_radius()
@@ -52,108 +52,88 @@ shared_ptr<Vec3> Sphere::intersect(Ray ray)
     This formula is easily modified for cases where spheres are not centered exactly
     at the origin.
 
+    If destination has z coordinate 0, then we know that it is the plane. Therefore, return NULL.
+
     */
 
-    int rad = this->radius;
-    Vec3 center = this->center;
+    if (ray.get_dest().get_z() == 0) {
+
+        return NULL;
+
+    }
 
     Vec3 dest = ray.get_dest();
     Vec3 origin = ray.get_orig();
     int color = ray.get_color();
 
     // coefficients for equation
+
+    Vec3 L = origin - this->center;
+
     double a = dest * dest;
-    double b = 2 * dest * (origin - center);
-    double c = (origin * origin) - rad;
+    double b = 2 * dest * L;
+    double c = (L * L) - this->radius;
 
-    double discrim = (b * b) - (4 * (a * c));
+    double t0, t1; // --> if intersection occurs, these variables will hold parameter values
 
-    discrim = Operations::round_to(discrim);
-
-    // now calculate parameter based on discriminant
-
-    double t0;
-    double t1;
-
-    double valid_param = MAXFLOAT;
-    bool param_found = false;
-
-    if (discrim > 0)
+    if (!Operations::solve_quadratic(a, b, c, t0, t1))
     {
-
-        t0 = (-b + sqrt(discrim)) / (2 * a);
-        t1 = (-b - sqrt(discrim)) / (2 * a);
-
-        if (t1 > 0 && t1 > 0)
-        {
-
-            if (t1 > t0)
-                valid_param = t1;
-            else if (t0 > t1)
-                valid_param = t0;
-            else if (t0 == t1)
-                valid_param = t1;
-
-            param_found = true;
-        }
-        else if (t1 > 0 && t0 < 0)
-        {
-
-            valid_param = t1;
-            param_found = true;
-        }
-    }
-    else if (discrim == 0)
-    {
-
-        valid_param = (-b) / (2 * a);
+        return NULL;
     }
 
-    shared_ptr<Vec3> ret_ptr = NULL;
-
-    if (param_found)
-    {
-
-        Vec3 ret_val = origin + valid_param * dest;
-
-        ret_ptr = make_shared<Vec3>(ret_val.get_x(), ret_val.get_y(), ret_val.get_z());
-
-    }
-
-    return ret_ptr;
+    else
+        return NULL;
 }
 
-bool Sphere::get_reflective() {
+bool Sphere::get_reflective()
+{
 
     return this->reflective;
-
 }
 
-double Sphere::get_refractive_ind() {
+double Sphere::get_refractive_ind()
+{
 
     return this->refractive_ind;
-
 }
 
-Vec3 Sphere::calculate_normal(Vec3 poi) {
+Vec3 Sphere::calculate_normal(Vec3 poi)
+{
 
     Vec3 normal_vec = poi - this->center;
 
     return normal_vec;
-
 }
 
-Ray Sphere::calculate_normal_ray(Vec3 poi) {
+Ray Sphere::calculate_normal_ray(Vec3 poi)
+{
 
     // first get center of sphere
     // then subtract center of sphere from poi --> this gives us vector from poi to center
     // then multiply by -1 to get our destination vector from poi --> dest will normalize automatically
 
     Vec3 poi_to_center = this->center - poi;
-    Vec3 poi_to_world = -1*poi_to_center;
+    Vec3 poi_to_world = -1 * poi_to_center;
 
-    Ray ret_val {poi, poi_to_world};
+    Ray ret_val{poi, poi_to_world};
 
     return ret_val;
+}
 
+u_int32_t Sphere::compute_reflected_color(Vec3 poi, Light light_src)
+{
+
+    /*
+    computes normal
+    based on the angle between the normal and the light source, return the level of brightness that that point is
+    experiencing
+    */
+
+    Vec3 to_light = poi - light_src.get_position();
+
+    Vec3 normal = this->calculate_normal(poi);
+
+    double hit_color = this->albedo / M_PI * light_src.get_luminosity() * light_src.get_color() * std::max(0.0, normal * (-1 * to_light));
+
+    return hit_color;
 }

@@ -11,6 +11,8 @@ Camera::Camera(int length, int width, shared_ptr<Scene> s, string filename) : re
 
     cout << "Scene compilation initialized at resolution " << length << " x " << width << "." << "\n";
 
+    file << "P3" << "\n" << length << " " << width << "\n" << 255 << "\n";
+
     cout << "Output filestream opened successfully. Moving on to render." << endl;
 }
 
@@ -23,9 +25,9 @@ void Camera::render() {
 
     cout << "Render starting..." << endl;
 
-    for (int i = 0; i < this->res_length; i++) {
+    for (int x = 0; x < this->res_length; x++) {
 
-        for (int j = 0; j < this->res_width; j++) {
+        for (int z = 0; z < this->res_width; z++) {
 
             u_int32_t ret_color;
 
@@ -34,8 +36,9 @@ void Camera::render() {
             // also takes an argument for a pointer to intersected geometry, which will be populated if
             // ray intersects with geometry or the plane
 
+            Vec3 dest {x, 0, z};
             shared_ptr<Geometry> intersected_geom;
-            Ray casted_ray { this->pos, Vec3 {i, 0, j} };
+            Ray casted_ray { this->pos, dest};
             shared_ptr<Vec3> closest_poi;
 
 
@@ -54,6 +57,8 @@ void Camera::render() {
                 ret_color = this->trace(*closest_poi, intersected_geom, casted_ray);
 
             }
+
+            this->output_to_file(ret_color);
 
         }
 
@@ -109,13 +114,10 @@ u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, 
         }
 
         // this block will only run if there were no intersections in the scene. it multiplies the intensity of the light times the color and returns this value.
-        ret_val = scene_light.get_luminosity() * intersected_geom->get_color();
-
-        return ret_val;
-
-
-
+        ret_val = intersected_geom->compute_reflected_color(poi, scene_light);
     }
+
+    return ret_val;
 
 }
 
