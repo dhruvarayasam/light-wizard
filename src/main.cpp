@@ -53,7 +53,7 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 	
 	Vec3 sphere_coords {500, 200, 300};
 
-	Sphere* first_sphere = new Sphere{sphere_coords, 75, 1, 100, 0x228B22, false};
+	Sphere* first_sphere = new Sphere{sphere_coords, 75, 1, 100, 0x228B22, false}; // part of the geometry in the scene
 
 	shared_ptr<Geometry> first (first_sphere);
 

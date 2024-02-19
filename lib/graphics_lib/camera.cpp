@@ -31,7 +31,7 @@ void Camera::render() {
 
             u_int32_t ret_color;
 
-            // call closest intersection
+            // get closest intersection
             // closest intersection returns a pointer to a vector
             // also takes an argument for a pointer to intersected geometry, which will be populated if
             // ray intersects with geometry or the plane
@@ -39,22 +39,32 @@ void Camera::render() {
             Vec3 dest {x, 0, z};
             shared_ptr<Geometry> intersected_geom;
             Ray casted_ray { this->pos, dest};
-            shared_ptr<Vec3> closest_poi;
+            shared_ptr<Vec3> closest_geom_intersect;
+            Plane scene_plane = this->scene->get_plane();
 
+            closest_geom_intersect = Operations::closest_geom_intersection(casted_ray, this->scene, intersected_geom);
+            
+            // determine what was hit
+            
+            // if intersected_geom is NULL, no geometry was hit. 
+            // therefore, we have to check for either plane intersection or none.
 
-            closest_poi = Operations::closest_intersection(casted_ray, this->scene, intersected_geom);
+            if (closest_geom_intersect == NULL) {
 
-            if (intersected_geom == NULL && closest_poi == NULL) { // no intersections with plane or geometry
+                if (scene_plane.intersect(casted_ray)) {
 
-                ret_color = this->scene->get_background_color();
+                    ret_color = scene_plane.get_plane_color();
 
-            } else if (intersected_geom == NULL && closest_poi != NULL) { // no intersections with geometry but intersection with plane
+                } else {
 
-                ret_color = this->scene->get_plane_color();
+                    ret_color = this->scene->get_background_color();
 
-            } else { // intersection with scene geometry
-
-                ret_color = this->trace(*closest_poi, intersected_geom, casted_ray);
+                }
+            // if there was an intersection, then set the return color to the intersected geometry's
+            // respective color with the necessary calculations.
+            } else {
+                // calculate appropriate color here
+                ret_color = 0;
 
             }
 

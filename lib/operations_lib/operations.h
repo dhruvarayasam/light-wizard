@@ -29,7 +29,11 @@ namespace Operations {
     // This method calculates the distance between two points.
     double calculate_distance(Vec3 vec1, Vec3 vec2);
 
-    shared_ptr<Vec3> closest_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom);
+    /*
+    Calculates the closest geometry intersection given an incident ray, the scene pointer
+    and a parameter to save a reference to any geometry that has been intersected. DOES NOT CALCULATE PLANE INTERSECTIONS. CHECK PLANE INTERSECTIONS SEPERATELY.
+    */
+    shared_ptr<Vec3> closest_geom_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom);
 
 
     /*

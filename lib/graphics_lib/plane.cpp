@@ -1,3 +1,4 @@
+#pragma once
 #include "plane.h"
 
 
@@ -8,3 +9,10 @@ Plane::Plane(int pos, u_int32_t col) {
 
 }
 
+
+
+shared_ptr<Vec3> Plane::intersect(Ray ray) {
+
+    
+
+}

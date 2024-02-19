@@ -17,13 +17,15 @@ namespace Operations
         return res;
     }
 
-    shared_ptr<Vec3> closest_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom)
+    shared_ptr<Vec3> closest_geom_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom)
     {
 
         const vector<shared_ptr<Geometry>> &scene_geom = scene_ptr->get_geometry();
 
-        shared_ptr<Vec3> ret_val;
+        shared_ptr<Vec3> ret_val = NULL;
         double distance = 100000000;
+
+        // first check for intersection with geometry
 
         for (shared_ptr<Geometry> g : scene_geom) {
 
@@ -47,6 +49,7 @@ namespace Operations
             }
             
         }
+
 
         return ret_val;
 

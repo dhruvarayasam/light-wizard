@@ -7,12 +7,8 @@
 
 Contains initialization information for a Sphere. Has radius,
 refractive index, luminosity and opacity. Refractive index controls
-how the sphere refracts light, luminosity controls how bright the object is (irrespective of color)
-and opacity controls how transparent it is. Assume that all non-reflective and non-refractive spheres
-are diffuse.
-
-Luminosity and opacity are on a scale from 0 to 1.
-
+how the sphere refracts light, and opacity controls how transparent it is. Assume that all 
+non-reflective and non-refractive spheres are diffuse.
 */
 
 class Sphere : public Geometry

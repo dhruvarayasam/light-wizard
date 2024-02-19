@@ -7,7 +7,7 @@ using std::cout;
 
 // constructors
 
-Scene::Scene(int back_col, int plane_pos , int plane_col, vector<shared_ptr<Geometry>> geo, Light prim_light) : background_color(back_col), plane_position(plane_pos), geometry(geo), primary_light(prim_light), plane_color(plane_col) {}
+Scene::Scene(int back_col, vector<shared_ptr<Geometry>> geo, Light prim_light, Plane p) : background_color(back_col), geometry(geo), primary_light(prim_light), plane(p) {}
 
 
 
@@ -16,12 +16,6 @@ Scene::Scene(int back_col, int plane_pos , int plane_col, vector<shared_ptr<Geom
 int Scene::get_background_color() {
 
     return this->background_color;
-
-}
-
-int Scene::get_plane_color() {
-
-    return this->plane_color;
 
 }
 
@@ -48,6 +42,12 @@ const Light& Scene::get_primary_light() {
     const Light& ret_val = this->primary_light;
 
     return ret_val;
+
+}
+
+const Plane Scene::get_plane() {
+
+    return this->plane;
 
 }
 
