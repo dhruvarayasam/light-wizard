@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../../lib/graphics_lib/vec3.h"
-#include "../../lib/operations_lib/operations.h"
+#include "../../../lib/graphics_lib/vec3.h"
+#include "../../../lib/operations_lib/operations.h"
 #include <assert.h>
 #include "Config.h"
 

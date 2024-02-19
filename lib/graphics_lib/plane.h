@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <memory>
 #include "ray.h" 
@@ -9,7 +11,6 @@ class Plane {
     u_int32_t plane_color; // hex coded color of the plane
 
     public:
-
 
         Plane(int pos, u_int32_t col);
         int get_position();

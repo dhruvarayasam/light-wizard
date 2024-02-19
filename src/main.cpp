@@ -63,8 +63,9 @@ _/j  L l\_!  _//^---^\\_ )" << "\n";
 	scene_geom.push_back(first);
 
 	Light light {50, Vec3 {0, 0, 1090}, 0xfff49b};
+	Plane plane {0, 0x808080};
 
-	shared_ptr<Scene> scene_ptr = std::make_shared<Scene>(0x87CEEB, -2, 0x808080, scene_geom, light);
+	shared_ptr<Scene> scene_ptr = std::make_shared<Scene>(0x87CEEB, scene_geom, light, plane);
 	
 
 	Camera cam {res_width, res_height, scene_ptr, "first_render.ppm"};

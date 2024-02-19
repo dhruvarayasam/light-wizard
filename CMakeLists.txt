@@ -62,3 +62,20 @@ add_test(
 	NAME operator_overloads
 	COMMAND ${PROJECT_SOURCE_DIR}/tests/exec/vec_tests/operator_overloads
 )
+
+# intersection testing
+add_executable(basic_intersection ${PROJECT_SOURCE_DIR}/tests/src/intersection_tests/basic_intersection_test.cpp)
+set_target_properties(basic_intersection
+	PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/tests/exec/intersection_tests"	
+
+)
+
+enable_testing()
+add_test(
+
+	NAME basic_intersection
+	COMMAND ${PROJECT_SOURCE_DIR}/tests/exec/intersection_tests/basic_intersection
+
+)
+

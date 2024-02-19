@@ -1,8 +1,9 @@
 #pragma once
-#include "scene.h"
-#include "../operations_lib/operations.h"
 #include <memory>
 #include <fstream>
+#include "scene.h"
+#include "../geometry_lib/geometry.h"
+#include "../operations_lib/operations.h"
 
 using std::shared_ptr;
 using std::string;
