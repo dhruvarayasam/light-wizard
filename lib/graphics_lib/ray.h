@@ -28,5 +28,9 @@ class Ray {
         Vec3 get_dest();
         int get_color();
 
+        // set methods
+        void set_orig(Vec3 a);
+        void set_dest(Vec3 a);
+
 };
 

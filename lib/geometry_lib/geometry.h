@@ -23,11 +23,11 @@ public:
     which returns a shared pointer of an intersection point given a ray. If no such point exists,
     then this pointer will be null.
     */
-    virtual shared_ptr<Vec3> intersect(Ray ray) = 0;
     virtual bool get_reflective() = 0;
     virtual double get_refractive_ind() = 0;
     virtual u_int32_t get_color() = 0;
+    virtual shared_ptr<Vec3> calculate_poi(Ray incident_ray) = 0;
     virtual Vec3 calculate_normal(Vec3 poi) = 0;
-    virtual Ray calculate_normal_ray(Vec3 poi) = 0;
+    virtual Ray calculate_normal_ray(Ray incident_ray, Vec3 poi) = 0;
     virtual u_int32_t compute_reflected_color(Vec3 poi, Light light_src) = 0;
 };

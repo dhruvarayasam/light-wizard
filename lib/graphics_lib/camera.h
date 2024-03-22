@@ -50,7 +50,7 @@ public:
     is reflective/refractive, and eventually outputs a single hex code for a color that will be translated into
     a pixel in the final rendering.
     */
-    u_int32_t trace(const Vec3 &poi, shared_ptr<Geometry> intersected_geom, const Ray &ray);
+    u_int32_t trace(const Vec3 &poi, shared_ptr<Geometry> intersected_geom, const Ray &ray, int depth);
 
     /*
     Given a color, this method will use the reference to the output filestream attribute

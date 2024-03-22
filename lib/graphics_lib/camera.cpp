@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "camera.h"
 
 using std::cout;
@@ -23,52 +24,91 @@ void Camera::render() {
     WITH OTHER SCALING OPERATIONS. 
     */
 
+    Ray casted_ray {this->pos, Vec3 {0, 0, 0}};
+    Plane plane = this->scene->get_plane();
+
     cout << "Render starting..." << endl;
 
-    for (int x = 0; x < this->res_length; x++) {
+    for (int z = this->res_length; z > 0; z--) {
 
-        for (int z = 0; z < this->res_width; z++) {
+        for (int x = 0; x < this->res_width; x++) {
 
             u_int32_t ret_color;
+            Vec3 new_dest  = Vec3{x, 0, z+2} - this->pos; // raster image is 2 pixels above the plane 
+
+            // Vec3 new_dest = Vec3 {x, 0, z+2};
+
+            // check that new_dest is updated here if it is the zero vector
+            casted_ray.set_dest(new_dest);
 
             // get closest intersection
             // closest intersection returns a pointer to a vector
             // also takes an argument for a pointer to intersected geometry, which will be populated if
-            // ray intersects with geometry or the plane
+            // ray intersects with geometry
 
-            Vec3 dest {x, 0, z};
+            // first check for intersections w/ geometry
+                // if intersection exists (and object is diffuse), generate a new ray towards the light; if unobstructed calculate and return color
+                // if obstructed, then that point is in shadow
+            // then check for intersections w/ plane --> color plane accordingly
+            // if no intersections, then return background color of the scene
+
+
             shared_ptr<Geometry> intersected_geom;
-            Ray casted_ray { this->pos, dest};
-            shared_ptr<Vec3> closest_geom_intersect;
-            Plane scene_plane = this->scene->get_plane();
+            shared_ptr<Vec3> closest_poi = NULL;
+            shared_ptr<Scene> s = this->scene;
 
-            closest_geom_intersect = Operations::closest_geom_intersection(casted_ray, this->scene, intersected_geom);
-            
-            // determine what was hit
-            
-            // if intersected_geom is NULL, no geometry was hit. 
-            // therefore, we have to check for either plane intersection or none.
+            // check for the closest intersection here --> if there is one, populate intersected_geom and 
+            // closest_geom_intersect w/ POI
 
-            if (closest_geom_intersect == NULL) {
+            // if there is absolutely no intersection, check for plane intersection
 
-                if (scene_plane.intersect(casted_ray)) {
+            // if there is neither, then return background color
+            vector<shared_ptr<Geometry>> scene_geometry = s->get_geometry();
 
-                    ret_color = scene_plane.get_plane_color();
+            double min_dist = INT64_MAX;
 
-                } else {
+            for (shared_ptr<Geometry> geom : scene_geometry) {
 
-                    ret_color = this->scene->get_background_color();
+                shared_ptr<Vec3> curr_poi = geom->calculate_poi(casted_ray);
+
+                if (curr_poi != NULL) {
+                    
+                    double dist = Operations::calculate_distance(this->pos, *closest_poi);
+
+                    if (dist < min_dist) {
+
+                        closest_poi = curr_poi;
+                        intersected_geom = geom;
+                        min_dist = dist;
+
+                    }
 
                 }
-            // if there was an intersection, then set the return color to the intersected geometry's
-            // respective color with the necessary calculations.
-            } else {
-                // calculate appropriate color here
-                ret_color = 0;
 
             }
 
-            this->output_to_file(ret_color);
+            // now that we have the closest geometry that was intersected and its point of intersection, 
+            // we can calculate the color that must be returned, based on reflection/refraction
+
+            if (intersected_geom == NULL && !plane.intersect(casted_ray)) {
+
+                output_to_file(this->scene->get_background_color());
+
+            } else if (intersected_geom == NULL) {
+
+                output_to_file(plane.get_plane_color()); // temporary measure, we will have to calculate exact shading of plane later on
+
+            } else { // compute color of geometry here
+
+
+
+            }
+            
+
+
+            
+
+
 
         }
 
@@ -81,53 +121,9 @@ void Camera::render() {
 
 }
 
-u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, const Ray& ray) {
+u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, const Ray& ray, int depth) {
 
-    u_int32_t ret_val;
-
-    Light scene_light = this->scene->get_primary_light();
-
-    if (intersected_geom->get_reflective()) { // if the intersected geometry is reflective
-
-        
-
-    } else if (intersected_geom->get_refractive_ind() != 1) { // if the intersected geometry is refractive
-
-
-    } else { 
-        // this condition triggers if intersected geometry is not reflective or refractive. 
-        // in this case, simply draw a ray to the light.
-        // if blocked, the point is in shadow. if blocked by a reflective object call trace recursively
-
-        // calculate a new ray to the light
-
-        Vec3 direction = scene_light.get_position() - poi; // this is the direction vector
-
-        Ray to_light {poi, direction}; // this is the completed ray that is pointed towards the light from the point of intersection
-
-
-        for (shared_ptr<Geometry> g : this->scene->get_geometry()) {
-
-            shared_ptr<Vec3> intersect_pt = g->intersect(to_light);
-
-            if (intersect_pt == NULL) {
-
-                // this means there are no intersections. the point is in view of the light. 
-                // therefore, we have to multiply the light intensity with the color.
-
-                ret_val = intersected_geom->get_color() / 2;
-
-                return ret_val;
-
-            }
-
-        }
-
-        // this block will only run if there were no intersections in the scene. it multiplies the intensity of the light times the color and returns this value.
-        ret_val = intersected_geom->compute_reflected_color(poi, scene_light);
-    }
-
-    return ret_val;
+    return 0;
 
 }
 
@@ -135,14 +131,12 @@ bool Camera::output_to_file(u_int32_t color) {
 
     int color_mask = 0x000000FF;
 
-    int red = (color >> 16) & color_mask;
-    int green = (color >> 8) & color_mask;
-    int blue = (color) & color_mask;
+    u_int32_t red = (color >> 16) & color_mask;
+    u_int32_t green = (color >> 8) & color_mask;
+    u_int32_t blue = (color) & color_mask;
 
     this->file << red << ' ' << green << ' ' << blue << "\n";
 
     return true;
 
 }
-
-
