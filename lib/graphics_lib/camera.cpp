@@ -27,9 +27,9 @@ void Camera::render() {
 
     for (int x = 0; x < this->res_length; x++) {
 
-        for (int z = 0; z < this->res_width; z++) {
+        for (int z = 10; z < this->res_width+10; z++) {
 
-            u_int32_t ret_color;
+            u_int32_t ret_color = this->scene->get_background_color();
 
             // get closest intersection
             // closest intersection returns a pointer to a vector
@@ -41,32 +41,31 @@ void Camera::render() {
             Ray casted_ray { this->pos, dest};
             shared_ptr<Vec3> closest_geom_intersect;
             Plane scene_plane = this->scene->get_plane();
+            double min_dist;
 
             closest_geom_intersect = Operations::closest_geom_intersection(casted_ray, this->scene, intersected_geom);
             
+            if (closest_geom_intersect != NULL) {
+
+                min_dist = Operations::calculate_distance(*closest_geom_intersect, this->pos);
+                // now we have the closest object hit, the distance to it and the point that it was intersected at
+
+                // create shadow ray and call trace here
+
+                Ray shadow_ray = {*closest_geom_intersect, this->scene->get_primary_light().get_position()};
+
+                ret_color = trace(*closest_geom_intersect, intersected_geom, shadow_ray);
+
+            }
+
+
+
+
+
             // determine what was hit
             
             // if intersected_geom is NULL, no geometry was hit. 
             // therefore, we have to check for either plane intersection or none.
-
-            if (closest_geom_intersect == NULL) {
-
-                if (scene_plane.intersect(casted_ray)) {
-
-                    ret_color = scene_plane.get_plane_color();
-
-                } else {
-
-                    ret_color = this->scene->get_background_color();
-
-                }
-            // if there was an intersection, then set the return color to the intersected geometry's
-            // respective color with the necessary calculations.
-            } else {
-                // calculate appropriate color here
-                ret_color = 0;
-
-            }
 
             this->output_to_file(ret_color);
 
