@@ -1,7 +1,7 @@
 #pragma once
 #include "light.h"
 #include "../geometry_lib/geometry.h"
-#include "plane.h"
+#include "../geometry_lib/plane.h"
 #include <vector>
 #include <memory>
 

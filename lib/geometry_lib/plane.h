@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <memory>
-#include "ray.h" 
+#include "../graphics_lib/ray.h" 
 
 using std::shared_ptr;
 class Plane {
