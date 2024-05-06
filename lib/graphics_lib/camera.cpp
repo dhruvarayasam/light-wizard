@@ -87,8 +87,7 @@ void Camera::render() {
 
             }
 
-            // now that we have the closest geometry that was intersected and its point of intersection, 
-            // we can calculate the color that must be returned, based on reflection/refraction
+            // at this point we have any geometry that was intersected and its point of intersection (if intersection occured)
 
             if (intersected_geom == NULL && !plane.intersect(casted_ray)) {
 
@@ -96,11 +95,12 @@ void Camera::render() {
 
             } else if (intersected_geom == NULL) {
 
-                output_to_file(plane.get_plane_color()); // temporary measure, we will have to calculate exact shading of plane later on
+                // temporary measure, we will have to calculate exact shading of plane later on
+                output_to_file(plane.get_plane_color());
 
             } else { // compute color of geometry here
 
-
+                output_to_file();
 
             }
             

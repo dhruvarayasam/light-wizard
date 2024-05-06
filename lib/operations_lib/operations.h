@@ -9,22 +9,20 @@
 /*
 
 This set of functions dictate the mathematical operations needed
-to render the image. 
+to render the image.
 
 */
 
 using std::shared_ptr;
 
+namespace Operations
+{
 
-namespace Operations {
-
-
-    // rounds the value to the specified precision 
-    double round_to (double value);
+    // rounds the value to the specified precision
+    double round_to(double value);
 
     // This method returns true if a and b point in the same direction; i.e, if their components line up.
-    bool verify_direct(const Ray& a, const Ray& b);
-
+    bool verify_direct(const Ray &a, const Ray &b);
 
     // This method calculates the distance between two points.
     double calculate_distance(Vec3 vec1, Vec3 vec2);
@@ -34,7 +32,6 @@ namespace Operations {
     and a parameter to save a reference to any geometry that has been intersected. DOES NOT CALCULATE PLANE INTERSECTIONS. CHECK PLANE INTERSECTIONS SEPERATELY.
     */
     shared_ptr<Vec3> closest_geom_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom);
-
 
     /*
     This function calculates and returns the refracted ray that exits the piece of intersected geometry.
@@ -58,6 +55,6 @@ namespace Operations {
     places.
     */
 
-   bool solve_quadratic(const double &a, const double &b, const double &c, double &x0, double &x1);
-    
+    bool solve_quadratic(const double &a, const double &b, const double &c, double &x0, double &x1);
+
 }

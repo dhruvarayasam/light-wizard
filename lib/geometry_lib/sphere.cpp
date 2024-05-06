@@ -120,6 +120,12 @@ u_int32_t Sphere::compute_reflected_color(Vec3 poi, Light light_src)
     experiencing
     */
 
+   /*
+   
+   compute refraction/reflect color
+   
+   */
+
     Vec3 to_light = poi - light_src.get_position();
 
     Vec3 normal = this->calculate_normal(poi);

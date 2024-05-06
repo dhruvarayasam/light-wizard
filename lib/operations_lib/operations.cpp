@@ -46,8 +46,20 @@ namespace Operations
 
     }
 
-    Ray reflection_result_ray(Ray incident, shared_ptr<Geometry> intersected_geom) {
+    Ray reflection_result_ray(Ray incident, shared_ptr<Geometry> intersected_geom) 
+    {
 
+    }
+
+    u_int32_t compute_final_color_geometry (  ) 
+    {
+
+
+
+    }
+
+    u_int32_t compute_final_color_plane(  ) {
+        
     }
 
     bool solve_quadratic(const double &a, const double &b, const double &c, double &x0, double &x1) {
