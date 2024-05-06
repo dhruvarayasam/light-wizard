@@ -35,16 +35,4 @@ int Ray::get_color() {
 
 }
 
-void Ray::set_orig(Vec3 a) {
-
-    this->orig = a;
-
-}
-
-void Ray::set_dest(Vec3 a) {
-
-    this->dest = a;
-
-}
-
 

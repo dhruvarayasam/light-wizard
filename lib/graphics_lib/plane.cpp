@@ -23,27 +23,8 @@ int Plane::get_position() {
 
 
 
-bool Plane::intersect(Ray incident_ray) {
+shared_ptr<Vec3> Plane::intersect(Ray ray) {
 
-    Vec3 p0 = {0, 0, this->get_position()};
-
-    Vec3 plane_normal = this->get_normal();
-
-    float denom = (incident_ray.get_dest() * plane_normal);
-
-    if (denom != 0) {
-        float numer = (plane_normal * p0) - (plane_normal *((incident_ray.get_orig())));
-
-        float r = numer / denom;
-
-        return (r >= 0);
-    }
-
-    return false;
-}
-
-Vec3 Plane::get_normal() {
-
-    return this->normal;
+    
 
 }

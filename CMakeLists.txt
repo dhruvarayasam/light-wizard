@@ -65,8 +65,6 @@ add_test(
 
 # intersection testing
 add_executable(basic_intersection ${PROJECT_SOURCE_DIR}/tests/src/intersection_tests/basic_intersection_test.cpp)
-target_link_libraries(basic_intersection GraphicsLib GeometryLib OperationsLib)
-
 set_target_properties(basic_intersection
 	PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/tests/exec/intersection_tests"	

@@ -10,7 +10,6 @@ Sphere::Sphere(Vec3 cent, double rad, double ref, int op, u_int32_t col, bool re
     this->reflective = refle;
     this->refractive_ind = ref;
     this->color = col;
-    this->opacity = op;
 }
 
 double Sphere::get_radius()
@@ -31,58 +30,65 @@ u_int32_t Sphere::get_color()
     return this->color;
 }
 
-shared_ptr<Vec3> Sphere::calculate_poi(Ray incident_ray)
+shared_ptr<Vec3> Sphere::intersect(Ray ray)
 {
-    // calculate discriminant of intersection equation
 
-    // clean up this code
+    /*
 
-    shared_ptr<Vec3> ret_val;
+    CALCULATION FOR INTERSECTION
 
-    double b_sq = pow(2 * (incident_ray.get_orig() * incident_ray.get_dest()), 2);
-    double ac = 4 * incident_ray.get_dest() * incident_ray.get_dest() * ((incident_ray.get_orig() * incident_ray.get_orig()) - pow(this->get_radius(), 2));
+    We represent a ray in the format O + tD. t is a parameter and
+    O and D are origin and destination. The format for representing a circle in 3D
+    is x^2+y^2+z^2 = R^2. This can be denoted as P^2 - R^2 = 0, where P is a 3D vector.
+    P can be substituted with O + tD. Simplifying, this gives us:
 
-    double discriminant = b_sq - ac;
+    D^2*t^2 + 2ODt + O^2 - R^2 = 0. To solve for our points of intersection,
+    we solve for the discriminant.
 
-    if (discriminant < 0) NULL;
+    If discriminant is >0, there are two intersections.
+    If discriminant is =0, there is 1 intersection.
+    If discriminant is <0, there are no intersections.
 
-    else if (discriminant == 0) {
+    This formula is easily modified for cases where spheres are not centered exactly
+    at the origin.
 
-        ret_val = make_shared<Vec3>(incident_ray.get_orig() + ((-b_sq)/ 2 * (incident_ray.get_dest() * incident_ray.get_dest())) * incident_ray.get_dest());
+    If destination has z coordinate 0, then we know that it is the plane. Therefore, return NULL.
 
-    } else if (discriminant > 0) {
+    */
 
-        double t0 = (2*(incident_ray.get_orig() * incident_ray.get_dest()) + discriminant) / 2 * (incident_ray.get_dest()*incident_ray.get_dest());
-        double t1 = (2*(incident_ray.get_orig() * incident_ray.get_dest()) - discriminant) / 2 * (incident_ray.get_dest()*incident_ray.get_dest());
+    if (ray.get_dest().get_z() == 0) {
 
-        Vec3 t0_vec = incident_ray.get_orig() + t0 * incident_ray.get_dest();
-        Vec3 t1_vec = incident_ray.get_orig() + t1 * incident_ray.get_dest();
+        return NULL;
 
-        if (t0 < 0) ret_val = make_shared<Vec3>(t1_vec);
-        else if (t1 < 0) ret_val = make_shared<Vec3> (t0_vec);
-
-        else { // both t0 and t1 are greater than zero; in such case, compute which one is closer to the origin of the ray
-
-            if (Operations::calculate_distance(incident_ray.get_orig(), t0_vec) < Operations::calculate_distance(incident_ray.get_orig(), t0_vec)) {
-                ret_val = make_shared<Vec3> (t0_vec);
-            } else ret_val = make_shared<Vec3> (t1_vec);
-
-        }
     }
 
-    return ret_val;
+    Vec3 dest = ray.get_dest();
+    Vec3 origin = ray.get_orig();
+    int color = ray.get_color();
+
+    // coefficients for equation
+
+    Vec3 L = origin - this->center;
+
+    double a = dest * dest;
+    double b = 2 * dest * L;
+    double c = (L * L) - this->radius;
+
+    double t0, t1; // --> if intersection occurs, these variables will hold parameter values
+
+    if (!Operations::solve_quadratic(a, b, c, t0, t1))
+    {
+        return NULL;
+    }
+
+    else
+        return NULL;
 }
 
 bool Sphere::get_reflective()
 {
 
     return this->reflective;
-}
-
-Vec3 Sphere::get_center() {
-
-    return this->center;
-
 }
 
 double Sphere::get_refractive_ind()
@@ -93,7 +99,10 @@ double Sphere::get_refractive_ind()
 
 Vec3 Sphere::calculate_normal(Vec3 poi)
 {
-    return (poi - this->center).normalize();
+
+    Vec3 normal_vec = poi - this->center;
+
+    return normal_vec;
 }
 
 Ray Sphere::calculate_normal_ray(Vec3 poi)

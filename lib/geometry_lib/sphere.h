@@ -24,11 +24,10 @@ public:
 
     double get_radius();
     int get_opacity();
-    Vec3 get_center();
 
 
     // inherited methods
-    shared_ptr<Vec3> calculate_poi(Ray incident_ray);
+    shared_ptr<Vec3> intersect(Ray ray);
     bool get_reflective();
     double get_refractive_ind();
     u_int32_t get_color();
