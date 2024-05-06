@@ -19,7 +19,7 @@ int main() {
 
     // make geometry and light
     Vec3 sphere_coords {500, 200, 300};
-    Sphere* first_sphere = new Sphere{sphere_coords, 75, 1, 100, 0x228B22, false}; 
+    Sphere* first_sphere = new Sphere{sphere_coords, 75, 100, 100, 0xff9f00, false}; 
     shared_ptr<Geometry> first (first_sphere);
 
     Light light {50, Vec3 {0, 0, 1090}, 0xfff49b};

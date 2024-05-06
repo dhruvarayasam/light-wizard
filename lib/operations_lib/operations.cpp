@@ -97,7 +97,7 @@ namespace Operations
         if (discr < 0)
             return false;
         else if (discr == 0)
-            x0 = x1 = -0.5 * b / a;
+            x0 = x1 = -0.5 * (b / a);
         else
         {
             float q = (b > 0) ? -0.5 * (b + sqrt(discr)) : -0.5 * (b - sqrt(discr));

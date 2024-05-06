@@ -35,7 +35,7 @@ for (int z = this->res_width; z > 0; z--) {
             // also takes an argument for a pointer to intersected geometry, which will be populated if
             // ray intersects with geometry or the plane
 
-            Vec3 dest = -1 * (this->pos - Vec3 {x, 0, z});
+            Vec3 dest = (Vec3 {x, 0, z} - this->pos);
             shared_ptr<Geometry> intersected_geom;
             Ray casted_ray { this->pos, dest};
             shared_ptr<Vec3> closest_geom_intersect;
@@ -139,7 +139,7 @@ u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, 
 
         if (!in_shadow) {
 
-            ret_val = intersected_geom->get_color() * scene_light.get_luminosity();
+            ret_val = intersected_geom->get_color();
 
         } else {
 
