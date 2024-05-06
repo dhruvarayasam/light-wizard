@@ -1,12 +1,10 @@
-#pragma once
 #include "plane.h"
-#include <memory>
-
 
 Plane::Plane(int pos, u_int32_t col) {
 
     this->plane_position = pos;
     this->color = col;
+    this->normal = Vec3 {0, 0, this->plane_position+1};
 
 }
 
@@ -29,7 +27,7 @@ bool Plane::get_reflective() {
 }
 
 double Plane::get_refractive_ind() {
-    return 0;
+    return this->refractive_ind;
 }
 
 Vec3 Plane::calculate_normal(Vec3 poi) {
@@ -55,17 +53,15 @@ shared_ptr<Vec3> Plane::intersect(Ray ray) {
     Vec3 n = this->normal;
     double t;
 
-    if (denom > 1e-6) {
         Vec3 p0l0 = p0 - l0;
-        t = p0l0 * n;
-    }
+        t = (p0l0 * n) / denom;
 
-    if (t >= 0) {
+        if (t > 0) {
 
-        return std::make_shared<Vec3>(l0 + (t * l));
+            return std::make_shared<Vec3>(l0 + (t * l));
 
-    } else {
-        return NULL;
-    }
+        } 
+
+    return NULL;
 
 }

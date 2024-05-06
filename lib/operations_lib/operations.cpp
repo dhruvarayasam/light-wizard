@@ -17,7 +17,7 @@ namespace Operations
         return res;
     }
 
-    shared_ptr<Vec3> closest_geom_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom)
+    shared_ptr<Vec3> closest_geom_intersection(Ray ray, shared_ptr<Scene> scene_ptr)
     {
 
         const vector<shared_ptr<Geometry>> &scene_geom = scene_ptr->get_geometry();
@@ -36,13 +36,11 @@ namespace Operations
 
                 double intersection_distance = calculate_distance(*poi, ray.get_orig());
 
-                if (distance < intersection_distance) {
+                if (intersection_distance < distance) {
 
                     distance = intersection_distance;
 
                     ret_val = poi;
-
-                    intersected_geom = g;
 
                 }
 

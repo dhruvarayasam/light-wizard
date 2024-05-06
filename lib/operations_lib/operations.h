@@ -31,7 +31,7 @@ namespace Operations
     Calculates the closest geometry intersection given an incident ray, the scene pointer
     and a parameter to save a reference to any geometry that has been intersected. DOES NOT CALCULATE PLANE INTERSECTIONS. CHECK PLANE INTERSECTIONS SEPERATELY.
     */
-    shared_ptr<Vec3> closest_geom_intersection(Ray ray, shared_ptr<Scene> scene_ptr, shared_ptr<Geometry> intersected_geom);
+    shared_ptr<Vec3> closest_geom_intersection(Ray ray, shared_ptr<Scene> scene_ptr);
 
     /*
     This function calculates and returns the refracted ray that exits the piece of intersected geometry.

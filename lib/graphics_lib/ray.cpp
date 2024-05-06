@@ -5,7 +5,7 @@
 
 Ray :: Ray() : orig (Vec3 {0, 0, 0}), dest (Vec3 {1, 1, 1}) {}
 
-Ray :: Ray(Vec3 o, Vec3 d) : orig (o), dest (d.normalize()) {}
+Ray :: Ray(Vec3 o, Vec3 d) : orig (o), dest (d) {}
 
 // overloads
 
