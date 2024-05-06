@@ -1,5 +1,6 @@
 #pragma once
 #include "plane.h"
+#include <memory>
 
 
 Plane::Plane(int pos, u_int32_t col) {
@@ -47,6 +48,24 @@ u_int32_t Plane::compute_reflected_color(Vec3 poi, Light light_src) {
 
 shared_ptr<Vec3> Plane::intersect(Ray ray) {
 
-    return NULL;
+    float denom = this->normal * ray.get_dest();
+    Vec3 p0 = {0, 0, this->get_position()};
+    Vec3 l0 = ray.get_orig();
+    Vec3 l = ray.get_dest();
+    Vec3 n = this->normal;
+    double t;
+
+    if (denom > 1e-6) {
+        Vec3 p0l0 = p0 - l0;
+        t = p0l0 * n;
+    }
+
+    if (t >= 0) {
+
+        return std::make_shared<Vec3>(l0 + (t * l));
+
+    } else {
+        return NULL;
+    }
 
 }

@@ -10,7 +10,8 @@ class Plane : public Geometry {
 
     int plane_position; // corresponds to the z coordinate that the plane will be positioned at
     bool reflective = false;
-    int reflective_ind = 0;
+    int reflective_ind = 800;
+    Vec3 normal = {0, 0, plane_position + 1};
     
 
     public:

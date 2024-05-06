@@ -54,13 +54,9 @@ void Camera::render() {
 
                 Ray shadow_ray = {*closest_geom_intersect, this->scene->get_primary_light().get_position()};
 
-                ret_color = trace(*closest_geom_intersect, intersected_geom, shadow_ray);
+                ret_color = trace(*closest_geom_intersect, intersected_geom, shadow_ray, 5);
 
             }
-
-
-
-
 
             // determine what was hit
             
@@ -80,7 +76,7 @@ void Camera::render() {
 
 }
 
-u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, const Ray& ray) {
+u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, const Ray& ray, int depth) {
 
     u_int32_t ret_val;
 
@@ -90,7 +86,7 @@ u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, 
 
         
 
-    } else if (intersected_geom->get_refractive_ind() != 1) { // if the intersected geometry is refractive
+    } else if (intersected_geom->get_refractive_ind() != 800) { // if the intersected geometry is refractive
 
 
     } else { 
@@ -101,29 +97,35 @@ u_int32_t Camera::trace(const Vec3& poi, shared_ptr<Geometry> intersected_geom, 
         // calculate a new ray to the light
 
         Vec3 direction = scene_light.get_position() - poi; // this is the direction vector
-
-        Ray to_light {poi, direction}; // this is the completed ray that is pointed towards the light from the point of intersection
-
+        bool in_shadow = false;
+        shared_ptr<Geometry> obstruction;
 
         for (shared_ptr<Geometry> g : this->scene->get_geometry()) {
 
-            shared_ptr<Vec3> intersect_pt = g->intersect(to_light);
+            shared_ptr<Vec3> intersect_pt = g->intersect(ray);
 
-            if (intersect_pt == NULL) {
+            obstruction = g;
 
-                // this means there are no intersections. the point is in view of the light. 
-                // therefore, we have to multiply the light intensity with the color.
+            if (intersect_pt != NULL) {
 
-                ret_val = intersected_geom->get_color() / 2;
+                // this means that there is an intersection on the way to the light --> an obstruction
 
-                return ret_val;
+                in_shadow = true;
+                break;
 
             }
 
         }
 
-        // this block will only run if there were no intersections in the scene. it multiplies the intensity of the light times the color and returns this value.
-        ret_val = intersected_geom->compute_reflected_color(poi, scene_light);
+        if (!in_shadow) {
+
+            ret_val = obstruction->get_color() * scene_light.get_luminosity();
+
+        } else {
+
+            ret_val = this->scene->get_background_color();
+
+        }
     }
 
     return ret_val;
